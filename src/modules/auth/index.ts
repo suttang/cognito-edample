@@ -1,5 +1,5 @@
-import { Reducer, ActionCreator, Action } from 'redux'
-import { ThunkAction } from 'redux-thunk'
+import { Reducer, Action } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
 
 import { RootState } from '~/modules'
 
@@ -21,14 +21,15 @@ interface Attempt {
 //   type: 'auth/Attempt',
 //   credential: { username, password }
 // })
-export const attempt: ActionCreator<ThunkAction<void, State, undefined, Attempt>> = (username: string, password: string) => dispatch => {
+// export const attempt: ActionCreator<ThunkAction> = (username: string, password: string) => dispatch => {
+export const attempt = (username: string, password: string) => (dispatch: ThunkDispatch<RootState, void, Action>) => {
 // export const attempt = (username: string, password: string) => (dispatch, getState) => {
 // export const attempt = (username: string, password: string): ThunkAction<void, RootState, void, Attempt> => dispatch => {
-  // alert('attempt desu')
-  dispatch({
-    type: 'auth/Attempt',
-    credential: { username, password }
-  })
+  alert(`attempt desu ${username} ${password}`)
+  // dispatch({
+  //   type: 'auth/Attempt',
+  //   credential: { username, password }
+  // })
 
   return {
     type: 'auth/Attempt',

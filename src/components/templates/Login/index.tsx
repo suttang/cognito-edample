@@ -1,11 +1,15 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
 // import { connect, MapDispatchToProps } from 'react-redux'
-import { connect, MapDispatchToProps } from 'react-redux'
+import { Action } from 'redux'
+// import { connect, MapDispatchToProps } from 'react-redux'
+import { ThunkDispatch } from 'redux-thunk'
 import styled from 'styled-components'
 
 import Button from '~/components/atoms/Button'
 import InputGroup from '~/components/molecules/InputGroup'
 
+import { RootState } from '~/modules';
 import { attempt } from '~/modules/auth'
 
 export interface Props {
@@ -31,9 +35,10 @@ const Title = styled.h1`
   text-transform: uppercase;
 `
 
-type DispatchProps = Pick<Props, 'onSubmit'>
+// type DispatchProps = Pick<Props, 'onSubmit'>
 
-const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
+// const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, void, Action>) => ({
   onSubmit: () => {
     dispatch(attempt('tarou', 'password'))
   }
