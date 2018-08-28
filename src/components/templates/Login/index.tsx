@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
-// import { connect, MapDispatchToProps } from 'react-redux'
+// import { connect } from 'react-redux'
+import { connect, MapDispatchToProps } from 'react-redux'
 import { Action } from 'redux'
 // import { connect, MapDispatchToProps } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
@@ -35,10 +35,10 @@ const Title = styled.h1`
   text-transform: uppercase;
 `
 
-// type DispatchProps = Pick<Props, 'onSubmit'>
+type DispatchProps = Pick<Props, 'onSubmit'>
 
 // const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({
-const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, void, Action>) => ({
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch: ThunkDispatch<RootState, void, Action>) => ({
   onSubmit: () => {
     dispatch(attempt('tarou', 'password'))
   }
