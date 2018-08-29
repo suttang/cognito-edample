@@ -1,16 +1,11 @@
 import * as React from 'react'
-// import { connect } from 'react-redux'
 import { connect, MapDispatchToProps } from 'react-redux'
-import { Action } from 'redux'
-// import { connect, MapDispatchToProps } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
 import styled from 'styled-components'
 
 import Button from '~/components/atoms/Button'
 import InputGroup from '~/components/molecules/InputGroup'
 
-import { RootState } from '~/modules';
-import { attempt } from '~/modules/auth'
+import { login } from '~/modules/auth'
 
 export interface Props {
   onSubmit: () => any
@@ -38,10 +33,8 @@ const Title = styled.h1`
 type DispatchProps = Pick<Props, 'onSubmit'>
 
 // const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({
-const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch: ThunkDispatch<RootState, void, Action>) => ({
-  onSubmit: () => {
-    dispatch(attempt('tarou', 'password'))
-  }
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
+  onSubmit: () => dispatch(login({ username: 'tarou', password: 'hoge'}))
 })
 
 export default connect(

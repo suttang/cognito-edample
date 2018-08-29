@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
-import thunk, { ThunkMiddleware } from 'redux-thunk'
+import thunk from 'redux-thunk'
 
-import auth, * as AuthModule from '~/modules/auth'
+import * as AuthModule from '~/modules/auth'
 
 export interface RootState {
   auth: AuthModule.State
@@ -9,9 +9,9 @@ export interface RootState {
 
 export type RootAction = AuthModule.Actions
 
-const store = createStore<RootState, RootAction, {}, {}>(
-  combineReducers({ auth }),
-  applyMiddleware(thunk as ThunkMiddleware<RootState, RootAction>)
+const store = createStore<RootState>(
+  combineReducers({ auth: AuthModule.reducer }),
+  applyMiddleware(thunk)
 )
 
 export default store

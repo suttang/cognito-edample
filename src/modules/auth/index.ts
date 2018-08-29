@@ -1,54 +1,43 @@
-import { Reducer, ActionCreator } from 'redux'
+import { FSA } from 'flux-standard-action'
 import { ThunkAction } from 'redux-thunk'
 
+import { Reducer } from 'redux';
 import { RootState } from '~/modules'
 
+export type Actions = Login
+
+export enum ActionTypes {
+  Login = 'auth/LOGIN'
+}
+
+interface LoginPayload {
+  username: string
+  password: string
+}
+export interface Login extends FSA<LoginPayload, never> {
+  type: ActionTypes.Login
+  payload: LoginPayload
+}
+
+export const login = ({ username, password }: LoginPayload): ThunkAction<void, RootState, void> => dispatch => {
+  console.info('login desu', username, password)
+  
+}
+
 export interface State {
-  readonly isLoggedIn: boolean
+  username: string
 }
-
 export const initialState: State = {
-  isLoggedIn: true
+  username: 'suttang'
 }
 
-
-interface Attempt {
-  type: 'auth/Attempt';
-  credential: { username: string, password: string }
-}
-
-// export const attempt = (username: string, password: string): Attempt => ({
-//   type: 'auth/Attempt',
-//   credential: { username, password }
-// })
-// export const attempt: ActionCreator<ThunkAction> = (username: string, password: string) => dispatch => {
-export const attempt: ActionCreator<ThunkAction<void, RootState, undefined, Attempt>> = (username: string, password: string) => (dispatch) => {
-// export const attempt = (username: string, password: string) => (dispatch, getState) => {
-// export const attempt = (username: string, password: string): ThunkAction<void, RootState, void, Attempt> => dispatch => {
-  alert(`attempt desu ${username} ${password}`)
-  // dispatch({
-  //   type: 'auth/Attempt',
-  //   credential: { username, password }
-  // })
-
-  // return {
-  //   type: 'auth/Attempt',
-  //   credential: { username, password }
-  // }
-}
-
-export type Actions = Attempt
-
-export const reducer: Reducer<State, Actions> = (state = initialState, action) => {
+export const reducer: Reducer<State> = (state = initialState, action: Actions) => {
   switch (action.type) {
-    case 'auth/Attempt':
+    case ActionTypes.Login:
       return {
-        ...state,
-        isLoggedIn: true
+        ...state
       }
     default:
       return state
   }
 }
-
-export default reducer
