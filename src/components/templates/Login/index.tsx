@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Button from '~/components/atoms/Button'
 import InputGroup from '~/components/molecules/InputGroup'
 
-import { login } from '~/modules/auth'
+import { login, Login } from '~/modules/auth'
 
 export interface Props {
   onSubmit: () => any
@@ -33,7 +33,7 @@ const Title = styled.h1`
 type DispatchProps = Pick<Props, 'onSubmit'>
 
 // const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({
-const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({
   onSubmit: () => dispatch(login({ username: 'tarou', password: 'hoge'}))
 })
 

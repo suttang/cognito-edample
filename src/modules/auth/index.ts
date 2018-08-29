@@ -19,9 +19,8 @@ export interface Login extends FSA<LoginPayload, never> {
   payload: LoginPayload
 }
 
-export const login = ({ username, password }: LoginPayload): ThunkAction<void, RootState, void> => dispatch => {
+export const login = ({ username, password }: LoginPayload): ThunkAction<void, RootState, void, never> => () => {
   console.info('login desu', username, password)
-  
 }
 
 export interface State {

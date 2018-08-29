@@ -9,7 +9,7 @@ export interface RootState {
 
 export type RootAction = AuthModule.Actions
 
-const store = createStore<RootState>(
+const store = createStore<RootState, RootAction, {}, {}>(
   combineReducers({ auth: AuthModule.reducer }),
   applyMiddleware(thunk)
 )
