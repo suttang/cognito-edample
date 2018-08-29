@@ -8,15 +8,30 @@ export interface Props {}
 
 const Login: React.SFC<Props> = () => (
   <Container>
-    <LoginTemplate />
+    <LoginBox>
+      <LoginTemplate />
+    </LoginBox>
   </Container>
 )
 
 const Container = styled.div`
-  width: 800px;
+  // width: 100%;
+  // height: 100%;
+`
+
+const LoginBox = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 600px;
+  height: 450px;
   margin: auto;
-  padding: 40px;
-  background: #f6f6f6;
+  padding: 60px;
+  background: #313C47;
+  border-radius: 4px;
 `
 
 export default Login
