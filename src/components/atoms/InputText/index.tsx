@@ -5,7 +5,6 @@ export interface Props {
   className?: string
   name: string
   type: string
-  children?: React.ReactNode
   onChange: (e: React.ChangeEvent<any>) => void
   onBlur: (e: any) => void  
   value?: any

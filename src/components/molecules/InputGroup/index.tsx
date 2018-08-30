@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 
 import InputText from '~/components/atoms/InputText'
-import Label from '~/components/atoms/Label'
+import Text from '~/components/atoms/Text'
 
 
 export interface Props {
@@ -10,10 +10,10 @@ export interface Props {
   name: string
   label: string
   type: string
-  onChange: (e: React.ChangeEvent<any>) => void
-  onBlur: (e: any) => void  
   value?: any
   placeholder?: string
+  onChange: (e: React.ChangeEvent<any>) => void
+  onBlur: (e: any) => void  
 }
 
 const InputGroup: React.SFC<Props> = ({ className, label, name, type, onChange, onBlur, value, placeholder }) => (
@@ -27,7 +27,7 @@ const Container = styled.label`
   display: block;
 `
 
-const StyledLabel = styled(Label)`
+const StyledLabel = styled(Text)`
   display: block;
   margin-bottom: 10px;
   color: #fff;

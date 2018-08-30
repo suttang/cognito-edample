@@ -15,6 +15,11 @@ export interface Props {
   onSubmit: (values: FormValues) => void
 }
 
+interface FormProps {
+  initialEmail?: string
+  onSubmit: (values: FormValues) => void
+}
+
 const LoginFormSFC: React.SFC<InjectedFormikProps<Props, FormValues>> = ({ className }) => (
   <Container className={className}>
     <Form>
@@ -54,12 +59,7 @@ const ButtonWrapper = styled.div`
   text-align: center;
 `
 
-interface FormProps {
-  initialEmail?: string
-  onSubmit: (values: FormValues) => void
-}
-
-export const LoginForm = withFormik<FormProps, FormValues>({
+const LoginForm = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => {
     return {
       email: props.initialEmail || '',
@@ -68,3 +68,5 @@ export const LoginForm = withFormik<FormProps, FormValues>({
   },
   handleSubmit: (values, { props }) => props.onSubmit(values)
 })(LoginFormSFC)
+
+export default LoginForm

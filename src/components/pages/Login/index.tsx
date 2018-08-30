@@ -4,7 +4,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import styled from 'styled-components'
 
 import LoginFormTitle from '~/components/molecules/LoginFormTitle'
-import { LoginForm, FormValues as LoginFormValues } from '~/components/organisms/LoginForm'
+import LoginForm, { FormValues as LoginFormValues } from '~/components/organisms/LoginForm'
 
 import { RootState } from '~/modules';
 import { login, Login } from '~/modules/auth'
@@ -16,9 +16,7 @@ export interface Props {
 const Login: React.SFC<Props> = ({ handleSubmit }) => (
   <Container>
     <LoginBox>
-      <StyledLoginFormTitle name="cognito example app">
-        Sign in
-      </StyledLoginFormTitle>
+      <StyledLoginFormTitle name="cognito example app">Sign in</StyledLoginFormTitle>
       <LoginForm onSubmit={handleSubmit} />
     </LoginBox>
   </Container>
