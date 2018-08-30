@@ -38,8 +38,7 @@ const LoginFormSFC: React.SFC<InjectedFormikProps<Props, FormValues>> = ({ class
         />
       </InputGroupWrapper>
       <ButtonWrapper>
-        <Button theme="primary" size="large">Sign in</Button>
-        <input type="submit" value="submit" />
+        <Button type="submit" theme="primary" size="large">Sign in</Button>
       </ButtonWrapper>
     </Form>
   </Container>
