@@ -1,5 +1,4 @@
 import * as React from 'react'
-// import { connect, MapStateToProps, MapDispatchToProps } from 'react-redux'
 import styled from 'styled-components'
 
 import LoginTemplate from '~/components/templates/Login'
@@ -36,9 +35,3 @@ const LoginBox = styled.div`
 `
 
 export default Login
-
-// const mapDispatchToProps = dispatch => ({
-//   onClick: () => {
-//     alert('dispatch dayo')
-//   }
-// })

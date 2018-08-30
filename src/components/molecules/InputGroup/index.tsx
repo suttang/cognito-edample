@@ -7,14 +7,19 @@ import Label from '~/components/atoms/Label'
 
 export interface Props {
   className?: string
+  name: string
   label: string
   type: string
+  onChange: (e: React.ChangeEvent<any>) => void
+  onBlur: (e: any) => void  
+  value?: any
+  placeholder?: string
 }
 
-const InputGroup: React.SFC<Props> = ({ className, label, type }) => (
+const InputGroup: React.SFC<Props> = ({ className, label, name, type, onChange, onBlur, value, placeholder }) => (
   <Container className={className}>
     <StyledLabel>{label}</StyledLabel>
-    <StyledInputText type={type} />
+    <StyledInputText name={name} type={type} onChange={onChange} onBlur={onBlur} value={value} placeholder={placeholder} />
   </Container>
 )
 

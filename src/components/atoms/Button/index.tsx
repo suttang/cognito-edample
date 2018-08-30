@@ -49,4 +49,18 @@ const Container = styled.a.attrs({
     padding-top: 15px;
     padding-bottom: 15px;
   `}
+
+  /* HOVER */
+  &:hover {
+    ${(props: Props) => props.theme === 'primary' && css`
+      color: rgba(255, 255, 255, 0.85);
+      background-color: #A1AB46;
+    `}
+  }
+  &:active {
+    ${(props: Props) => props.theme === 'primary' && css`
+      color: rgba(255, 255, 255, 0.7);
+      background-color: #818938;
+    `}
+  }
 `
