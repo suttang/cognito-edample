@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import styled, { css } from 'styled-components'
-import ButtonLabel from '~/components/atoms/ButtonLabel'
+import Text from '~/components/atoms/Text'
 
 type Theme = 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'muted'
 type Size = 'large' | 'medium' | 'small' | 'x-small'
@@ -15,7 +15,7 @@ export interface Props {
 
 const Button: React.SFC<Props> = ({ className, children, onClick, theme, size }) => (
   <Container className={className} theme={theme} size={size} onClick={onClick}>
-    <ButtonLabel>{children}</ButtonLabel>
+    <Text>{children}</Text>
   </Container>
 )
 
@@ -29,9 +29,8 @@ const Container = styled.a.attrs({
   padding: 10px 8px;
   border-radius: 4px;
   border: 1px solid #666;
-  color: #333;
+  color: #fff;
   font-weight: 600;
-  font-family: Roboto;
   font-size: 16px;
   text-align: center;
   text-transform: uppercase;
@@ -46,8 +45,8 @@ const Container = styled.a.attrs({
 
   ${(props: Props) => props.size === 'large' && css`
     width: 330px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 13px;
+    padding-bottom: 13px;
   `}
 
   /* HOVER */

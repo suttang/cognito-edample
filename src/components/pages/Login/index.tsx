@@ -3,6 +3,7 @@ import { MapDispatchToProps, connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import styled from 'styled-components'
 
+import LoginFormTitle from '~/components/molecules/LoginFormTitle'
 import { LoginForm, FormValues as LoginFormValues } from '~/components/organisms/LoginForm'
 
 import { RootState } from '~/modules';
@@ -15,10 +16,9 @@ export interface Props {
 const Login: React.SFC<Props> = ({ handleSubmit }) => (
   <Container>
     <LoginBox>
-      <TitleWrapper>
-        <Title>Sign in</Title>
-        <SubTitle>cognito example app</SubTitle>
-      </TitleWrapper>
+      <StyledLoginFormTitle name="cognito example app">
+        Sign in
+      </StyledLoginFormTitle>
       <LoginForm onSubmit={handleSubmit} />
     </LoginBox>
   </Container>
@@ -27,28 +27,8 @@ const Login: React.SFC<Props> = ({ handleSubmit }) => (
 const Container = styled.div`
 `
 
-const TitleWrapper = styled.div`
-  display: flex;
+const StyledLoginFormTitle = styled(LoginFormTitle)`
   margin-bottom: 40px;
-`
-
-const Title = styled.h1`
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-family: Roboto;
-  font-size: 30px;
-  letter-spacing: 0.08rem;
-`
-
-const SubTitle = styled.p`
-  color: #fff;
-  margin-left: 20px;
-  opacity: 0.70;
-  font-size: 16px;
-  font-family: Roboto;
-  font-weight: 500;
-  line-height: 34px;
 `
 
 const LoginBox = styled.div`
