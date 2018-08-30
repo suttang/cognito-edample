@@ -1,15 +1,20 @@
 import * as React from 'react'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import ButtonLabel from '~/components/atoms/ButtonLabel'
+
+type Theme = 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'muted'
+type Size = 'large' | 'medium' | 'small' | 'x-small'
 
 export interface Props {
   className?: string
+  theme?: Theme
+  size?: Size
   onClick?: () => any
 }
 
-const Button: React.SFC<Props> = ({ className, children, onClick }) => (
-  <Container className={className} onClick={onClick}>
+const Button: React.SFC<Props> = ({ className, children, onClick, theme, size }) => (
+  <Container className={className} theme={theme} size={size} onClick={onClick}>
     <ButtonLabel>{children}</ButtonLabel>
   </Container>
 )
@@ -20,11 +25,28 @@ const Container = styled.a.attrs({
   role: 'button'
 })`
   display: inline-block;
-  background-color: #ccc;
-  color: #333;
-  cursor: pointer;
-  user-select: none;
+  background-color: #fff;
+  padding: 10px 8px;
   border-radius: 4px;
   border: 1px solid #666;
-  padding: 10px 8px;
+  color: #333;
+  font-weight: 600;
+  font-family: Roboto;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  user-select: none;
+
+  ${(props: Props) => props.theme === 'primary' && css`
+    color: #fff;
+    background-color: #AEB84B;
+  `}
+
+  ${(props: Props) => props.size === 'large' && css`
+    width: 330px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  `}
 `

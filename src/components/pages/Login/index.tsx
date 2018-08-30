@@ -32,6 +32,7 @@ const LoginBox = styled.div`
   padding: 60px;
   background: #313C47;
   border-radius: 4px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
 `
 
 export default Login

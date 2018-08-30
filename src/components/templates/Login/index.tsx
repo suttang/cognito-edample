@@ -26,7 +26,9 @@ const Login: React.SFC<Props> = ({ onSubmit }) => (
       <StyledInputGroup label="Email" type="text" />
       <StyledInputGroup label="Password" type="password" />
     </InputGroupWrapper>
-    <Button onClick={onSubmit}>Login</Button>
+    <ButtonWrapper>
+      <Button theme="primary" size="large" onClick={onSubmit}>Sign in</Button>
+    </ButtonWrapper>
   </Container>
 )
 
@@ -60,6 +62,10 @@ const InputGroupWrapper = styled.div`
 
 const StyledInputGroup = styled(InputGroup)`
   margin-bottom: 20px;
+`
+
+const ButtonWrapper = styled.div`
+  text-align: center;
 `
 
 type DispatchProps = Pick<Props, 'onSubmit'>
