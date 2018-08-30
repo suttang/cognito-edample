@@ -1,47 +1,58 @@
 import * as React from 'react'
-// import { connect } from 'react-redux'
 import { connect, MapDispatchToProps } from 'react-redux'
-import { Action } from 'redux'
-// import { connect, MapDispatchToProps } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import styled from 'styled-components'
 
-import Button from '~/components/atoms/Button'
-import InputGroup from '~/components/molecules/InputGroup'
+import { LoginForm } from '~/components/organisms/LoginForm'
 
 import { RootState } from '~/modules';
-import { attempt } from '~/modules/auth'
+import { login, Login } from '~/modules/auth'
 
 export interface Props {
-  onSubmit: () => any
+  submit: (values: FormData) => void
 }
 
 const Container = styled.div`
 `
 
-const Login: React.SFC<Props> = ({ onSubmit }) => (
+const Login: React.SFC<Props> = ({ submit }) => (
   <Container>
-    <Title>Sign in</Title>
-    <div>
-      <InputGroup label="メールアドレス" type="text" />
-      <InputGroup label="パスワード" type="password" />
-    </div>
-    <Button onClick={onSubmit}>Login</Button>
+    <TitleWrapper>
+      <Title>Sign in</Title>
+      <SubTitle>cognito example app</SubTitle>
+    </TitleWrapper>
+    <LoginForm />
   </Container>
 )
+
+const TitleWrapper = styled.div`
+  display: flex;
+  margin-bottom: 40px;
+`
 
 const Title = styled.h1`
   color: #fff;
   text-transform: uppercase;
+  font-weight: 600;
+  font-family: Roboto;
+  font-size: 30px;
+  letter-spacing: 0.08rem;
 `
 
-type DispatchProps = Pick<Props, 'onSubmit'>
+const SubTitle = styled.p`
+  color: #fff;
+  margin-left: 20px;
+  opacity: 0.70;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 500;
+  line-height: 34px;
+`
 
-// const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch) => ({
-const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch: ThunkDispatch<RootState, void, Action>) => ({
-  onSubmit: () => {
-    dispatch(attempt('tarou', 'password'))
-  }
+type DispatchProps = Pick<Props, 'submit'>
+
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch: ThunkDispatch<RootState, void, never>) => ({
+  submit: (values: FormData) => dispatch(login({ username: 'tarou', password: 'hoge'}))
 })
 
 export default connect(

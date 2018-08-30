@@ -6,30 +6,48 @@ import Label from '~/components/atoms/Label'
 
 
 export interface Props {
+  className?: string
+  name: string
   label: string
   type: string
+  onChange: (e: React.ChangeEvent<any>) => void
+  onBlur: (e: any) => void  
+  value?: any
+  placeholder?: string
 }
 
-const InputGroup: React.SFC<Props> = ({ label, type }) => (
-  <Container>
+const InputGroup: React.SFC<Props> = ({ className, label, name, type, onChange, onBlur, value, placeholder }) => (
+  <Container className={className}>
     <StyledLabel>{label}</StyledLabel>
-    <StyledInputText type={type} />
+    <StyledInputText name={name} type={type} onChange={onChange} onBlur={onBlur} value={value} placeholder={placeholder} />
   </Container>
 )
 
 const Container = styled.label`
-  display: flex;
-  margin-bottom: 10px;
+  display: block;
 `
 
 const StyledLabel = styled(Label)`
-  width: 160px;
-  flex-glow: 4;
-  line-height: 34px;
+  display: block;
+  margin-bottom: 10px;
+  color: #fff;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
 `
 
 const StyledInputText = styled(InputText)`
-  margin-bottom: 100px;
+  padding: 14px 18px;
+  border-radius: 2px;
+  outline: none;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.05rem;
 `
 
 export default InputGroup

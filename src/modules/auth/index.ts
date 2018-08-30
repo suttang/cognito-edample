@@ -1,54 +1,64 @@
-import { Reducer, ActionCreator } from 'redux'
+import { FSA } from 'flux-standard-action'
 import { ThunkAction } from 'redux-thunk'
 
+import { Reducer, ActionCreator } from 'redux';
 import { RootState } from '~/modules'
 
+export enum ActionTypes {
+  Login = 'auth/LOGIN',
+  Logout = 'auth/LOGOUT'
+}
+
+interface LoginPayload {
+  username: string
+  password: string
+}
+export interface Login extends FSA<LoginPayload, never> {
+  type: ActionTypes.Login
+  payload: LoginPayload
+}
+
+export const doLogin:ActionCreator<Login> = ({ username, password }) => ({
+  type: ActionTypes.Login,
+  payload: { username, password }
+})
+
+export interface Logout extends FSA<never, never> {
+  type: ActionTypes.Logout
+}
+export const logout: ActionCreator<Logout> = () => ({
+  type: ActionTypes.Logout
+})
+
+export const login = ({ username, password }: LoginPayload): ThunkAction<void, RootState, void, Login | Logout> => dispatch => {
+  console.info('login desu', username, password)
+  dispatch(doLogin({ username: 'tarou', password: 'hogehoge' }))
+  dispatch(logout())
+}
+
 export interface State {
-  readonly isLoggedIn: boolean
+  username: string
 }
-
 export const initialState: State = {
-  isLoggedIn: true
+  username: 'suttang'
 }
 
+export type Actions = Login | Logout
 
-interface Attempt {
-  type: 'auth/Attempt';
-  credential: { username: string, password: string }
-}
-
-// export const attempt = (username: string, password: string): Attempt => ({
-//   type: 'auth/Attempt',
-//   credential: { username, password }
-// })
-// export const attempt: ActionCreator<ThunkAction> = (username: string, password: string) => dispatch => {
-export const attempt: ActionCreator<ThunkAction<void, RootState, undefined, Attempt>> = (username: string, password: string) => (dispatch) => {
-// export const attempt = (username: string, password: string) => (dispatch, getState) => {
-// export const attempt = (username: string, password: string): ThunkAction<void, RootState, void, Attempt> => dispatch => {
-  alert(`attempt desu ${username} ${password}`)
-  // dispatch({
-  //   type: 'auth/Attempt',
-  //   credential: { username, password }
-  // })
-
-  // return {
-  //   type: 'auth/Attempt',
-  //   credential: { username, password }
-  // }
-}
-
-export type Actions = Attempt
-
-export const reducer: Reducer<State, Actions> = (state = initialState, action) => {
+export const reducer: Reducer<State> = (state = initialState, action: Actions) => {
+  console.info('this is reducer')
   switch (action.type) {
-    case 'auth/Attempt':
+    case ActionTypes.Login:
+      console.info('this is do login')
       return {
-        ...state,
-        isLoggedIn: true
+        ...state
+      }
+    case ActionTypes.Logout:
+      console.info('this is do LOGOUT')
+      return {
+        ...state
       }
     default:
       return state
   }
 }
-
-export default reducer
