@@ -1,8 +1,6 @@
-import { withFormik, FormikProps, Form, Field, FieldProps } from 'formik'
+import { withFormik, Form, Field, FieldProps, InjectedFormikProps } from 'formik'
 import * as React from 'react'
 import styled from 'styled-components'
-
-// https://stackoverflow.com/questions/46078452/typing-redux-forms-v7-with-typescript-and-react
 
 import Button from '~/components/atoms/Button'
 import InputGroup from '~/components/molecules/InputGroup'
@@ -14,9 +12,10 @@ export interface FormValues {
 
 export interface Props {
   className?: string
+  onSubmit: (values: FormValues) => void
 }
 
-const LoginFormSFC: React.SFC<Props & FormikProps<FormValues>> = ({ className, handleChange }) => (
+const LoginFormSFC: React.SFC<InjectedFormikProps<Props, FormValues>> = ({ className }) => (
   <Container className={className}>
     <Form>
       <InputGroupWrapper>
@@ -56,7 +55,8 @@ const ButtonWrapper = styled.div`
 `
 
 interface FormProps {
-  initialEmail?: string;
+  initialEmail?: string
+  onSubmit: (values: FormValues) => void
 }
 
 export const LoginForm = withFormik<FormProps, FormValues>({
@@ -66,7 +66,5 @@ export const LoginForm = withFormik<FormProps, FormValues>({
       password: ''
     }
   },
-  handleSubmit: values => {
-    console.info('aiueotarou', values)
-  }
+  handleSubmit: (values, { props }) => props.onSubmit(values)
 })(LoginFormSFC)

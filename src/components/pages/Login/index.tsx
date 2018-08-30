@@ -1,21 +1,54 @@
 import * as React from 'react'
+import { MapDispatchToProps, connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import styled from 'styled-components'
 
-import LoginTemplate from '~/components/templates/Login'
+import { LoginForm, FormValues as LoginFormValues } from '~/components/organisms/LoginForm'
 
-export interface Props {}
+import { RootState } from '~/modules';
+import { login, Login } from '~/modules/auth'
 
-const Login: React.SFC<Props> = () => (
+export interface Props {
+  handleSubmit: (values: LoginFormValues) => void
+}
+
+const Login: React.SFC<Props> = ({ handleSubmit }) => (
   <Container>
     <LoginBox>
-      <LoginTemplate />
+      <TitleWrapper>
+        <Title>Sign in</Title>
+        <SubTitle>cognito example app</SubTitle>
+      </TitleWrapper>
+      <LoginForm onSubmit={handleSubmit} />
     </LoginBox>
   </Container>
 )
 
 const Container = styled.div`
-  // width: 100%;
-  // height: 100%;
+`
+
+const TitleWrapper = styled.div`
+  display: flex;
+  margin-bottom: 40px;
+`
+
+const Title = styled.h1`
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: Roboto;
+  font-size: 30px;
+  letter-spacing: 0.08rem;
+`
+
+const SubTitle = styled.p`
+  color: #fff;
+  margin-left: 20px;
+  opacity: 0.70;
+  font-size: 16px;
+  font-family: Roboto;
+  font-weight: 500;
+  line-height: 34px;
 `
 
 const LoginBox = styled.div`
@@ -34,4 +67,13 @@ const LoginBox = styled.div`
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
 `
 
-export default Login
+type DispatchProps = Pick<Props, 'handleSubmit'>
+
+const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = (dispatch: ThunkDispatch<RootState, void, never>) => ({
+  handleSubmit: values => dispatch(login({ username: values.email, password: values.password}))
+})
+
+export default connect(
+  () => ({}),
+  mapDispatchToProps
+)(Login)
