@@ -9,6 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import store from '~/modules'
 
+// https://aws-amplify.github.io/amplify-js/media/authentication_guide
 Amplify.configure({
   Auth: {
     region: 'ap-northeast-1',
