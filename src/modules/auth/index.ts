@@ -2,7 +2,9 @@ import { FSA } from 'flux-standard-action'
 import { ThunkAction } from 'redux-thunk'
 
 import { Reducer, ActionCreator } from 'redux';
+import signIn from '~/api/auth/signIn'
 import { RootState } from '~/modules'
+
 
 export enum ActionTypes {
   Login = 'auth/LOGIN',
@@ -30,10 +32,17 @@ export const logout: ActionCreator<Logout> = () => ({
   type: ActionTypes.Logout
 })
 
-export const login = ({ username, password }: LoginPayload): ThunkAction<void, RootState, void, Login | Logout> => dispatch => {
-  console.info('login desu', username, password)
-  dispatch(doLogin({ username: 'tarou', password: 'hogehoge' }))
-  dispatch(logout())
+export const login = ({ username, password }: LoginPayload): ThunkAction<void, RootState, void, Login | Logout> => async dispatch => {
+  try {
+    await signIn({ username, password })
+    console.info('sign in ok')
+  } catch (error) {
+    console.error(error)
+  }
+
+  // console.info('login desu', username, password)
+  // dispatch(doLogin({ username: 'tarou', password: 'hogehoge' }))
+  // dispatch(logout())
 }
 
 export interface State {
