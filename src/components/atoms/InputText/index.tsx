@@ -22,4 +22,8 @@ const Container = styled.input`
   border: none;
   border-radius: 2px;
   outline: none;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+  }
 `
