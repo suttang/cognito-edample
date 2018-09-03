@@ -11,7 +11,7 @@ interface Params {
 interface UserData {
   username: string
   password: string
-  attribute: {
+  attributes: {
     email: string
     given_name: string
     family_name: string
@@ -21,7 +21,7 @@ interface UserData {
 const convertToUserData: (params: Params) => UserData = ({ username, password, email, givenName, familyName }) => ({
   username,
   password,
-  attribute: {
+  attributes: {
     email,
     given_name: givenName,
     family_name: familyName
