@@ -48,6 +48,10 @@ const StyledInputText = styled(InputText)`
   font-weight: 400;
   font-size: 16px;
   letter-spacing: 0.05rem;
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.20);
+  }
 `
 
 export default InputGroup
